@@ -5,12 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:id="@+id/relative_layout">
+    android:id="@+id/relative_layout"
+    android:background="#0000cc">
 
     <TextView
         android:id="@+id/tictactoe_textview"
         android:text="TicTacToe"
+        android:textSize="55sp"
+        android:fontFamily="@font/mighty_brush"
         android:layout_centerHorizontal="true"
+        android:textColor="#ffcc00"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -20,6 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:textSize="15sp"
+        android:textColor="#ffcc00"
         android:text="Tap to Play" />
 
 
