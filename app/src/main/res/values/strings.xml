@@ -2,4 +2,5 @@
     <string name="app_name">TicTacToe</string>
     <string name="won">won</string>
     <string name="play_again">play again</string>
+    <string name="draw">Draw</string>
 </resources>

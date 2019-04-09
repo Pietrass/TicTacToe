@@ -5,9 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:id="@+id/relative_layout"
-    android:background="#0000cc">
+    android:id="@+id/relative_layout">
 
+    <ImageView
+        android:src="@drawable/tictactoebackground"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <TextView
         android:id="@+id/tictactoe_textview"
         android:text="TicTacToe"

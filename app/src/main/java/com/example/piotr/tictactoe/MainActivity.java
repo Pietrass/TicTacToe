@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity {
         width = displayMetrics.widthPixels;
 
         ticTacToeTextView.setY(height / 4);
-        tapToPlayTextView.setY(height / 2);
+        tapToPlayTextView.setY(height - height / 7);
 
         Animator alphaAnimator = ObjectAnimator.ofFloat(tapToPlayTextView, View.ALPHA, 0f, 1f);
         alphaAnimator.setDuration(1000);

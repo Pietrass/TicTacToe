@@ -3,9 +3,13 @@ package com.example.piotr.tictactoe;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.widget.GridLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
+
+import static com.example.piotr.tictactoe.MainActivity.height;
 
 public class Board extends BaseActivity implements View.OnClickListener {
 
@@ -14,6 +18,8 @@ public class Board extends BaseActivity implements View.OnClickListener {
     GridLayout boardGrid;
     BoardButton[] boardButtonArray;
     public static String winner;
+    RelativeLayout winnerRelative;
+    TextView winnerTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +30,10 @@ public class Board extends BaseActivity implements View.OnClickListener {
         turnTextSwitcher.setInAnimation(getBaseContext(), android.R.anim.slide_in_left);
         turnTextSwitcher.setOutAnimation(getBaseContext(), android.R.anim.slide_out_right);
         boardGrid = findViewById(R.id.board_grid);
+        winnerRelative = findViewById(R.id.winner_relative_layout);
+        winnerTextView = findViewById(R.id.winner_text_view);
 
-        turnTextSwitcher.setY(MainActivity.height / 7);
+        turnTextSwitcher.setY(height / 7);
         turnTextSwitcher.setText("X turn");
         turn = 0;
         boardGrid.setBackgroundColor(Color.WHITE);
@@ -62,13 +70,11 @@ public class Board extends BaseActivity implements View.OnClickListener {
                 ) {
             if (turn == 0) {
                 winner = "X";
-                DialogPlayAgain dialogPlayAgain = new DialogPlayAgain();
-                dialogPlayAgain.show(getSupportFragmentManager(), "X");
+                slideWinnerView(winnerRelative);
+
             } else {
                 winner = "O";
-                DialogPlayAgain dialogPlayAgain = new DialogPlayAgain();
-                dialogPlayAgain.show(getSupportFragmentManager(), "O");
-
+                slideWinnerView(winnerRelative);
             }
         } else {
             if (turn == 0) {
@@ -81,10 +87,21 @@ public class Board extends BaseActivity implements View.OnClickListener {
 
             if (numOfMoves == 9) {
                 winner = "Draw";
-                DialogPlayAgain dialogPlayAgain = new DialogPlayAgain();
-                dialogPlayAgain.show(getSupportFragmentManager(), "Draw");
+                slideWinnerView(winnerRelative);
             }
         }
+    }
+
+    public void slideWinnerView(RelativeLayout winnerView) {
+        winnerView.setVisibility(View.VISIBLE);
+        if (winner.equals("Draw")) {
+            winnerTextView.setText(getResources().getString(R.string.draw));
+        } else {
+            winnerTextView.setText(winner + " " + getResources().getString(R.string.won));
+        }
+        TranslateAnimation animation = new TranslateAnimation(0, 0, (float) height, (float) (height / 2 - winnerView.getHeight() / 2));
+        animation.setDuration(3000);
+        winnerView.startAnimation(animation);
     }
 
     private void setButtonBackground(BoardButton button) {
