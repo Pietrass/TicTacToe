@@ -21,8 +21,8 @@ public class Board extends BaseActivity implements View.OnClickListener {
     GridLayout boardGrid;
     BoardButton[] boardButtonArray;
     public static String winner;
-    RelativeLayout winnerRelative;
-    TextView winnerTextView;
+    RelativeLayout winnerRelative, boardRelative;
+    TextView winnerTextView, playAgainTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,9 @@ public class Board extends BaseActivity implements View.OnClickListener {
         winnerRelative = findViewById(R.id.winner_relative_layout);
         winnerRelative.setY(height);
         winnerTextView = findViewById(R.id.winner_text_view);
-        winnerTextView.setOnClickListener(this);
+        playAgainTextView = findViewById(R.id.play_again);
+        playAgainTextView.setOnClickListener(this);
+        boardRelative = findViewById(R.id.board_relative);
 
         turnTextSwitcher.setY(height / 7);
         turnTextSwitcher.setText("X turn");
@@ -57,7 +59,7 @@ public class Board extends BaseActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.winner_text_view) {
+        if (id == R.id.play_again) {
             Intent intent = new Intent(getBaseContext(), Board.class);
             startActivity(intent);
         } else {
@@ -82,7 +84,6 @@ public class Board extends BaseActivity implements View.OnClickListener {
             if (turn == 0) {
                 winner = "X";
                 slideWinnerView(winnerRelative);
-
             } else {
                 winner = "O";
                 slideWinnerView(winnerRelative);

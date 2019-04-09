@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/boardBackground"
-    tools:context=".Board">
+    tools:context=".Board"
+    android:id="@+id/board_relative">
 
     <TextSwitcher
         android:id="@+id/turn_textswitcher"
@@ -87,10 +88,11 @@
         android:background="@drawable/winner_rectangle"
         android:visibility="gone">
 
+
         <TextView
             android:id="@+id/winner_text_view"
             android:text="@string/won"
-            android:textColor="#ffcc00"
+            android:textColor="#001a00"
             android:fontFamily="@font/mighty_brush"
             android:textSize="35sp"
             android:layout_width="match_parent"
@@ -101,10 +103,12 @@
         <TextView
             android:id="@+id/play_again"
             android:text="@string/play_again"
-            android:textColor="#ffcc00"
+            android:textColor="#001a00"
+            android:alpha="0.7"
             android:fontFamily="@font/mighty_brush"
-            android:layout_width="55dp"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true" />
 
