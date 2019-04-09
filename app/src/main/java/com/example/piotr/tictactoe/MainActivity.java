@@ -39,8 +39,8 @@ public class MainActivity extends BaseActivity {
         height = displayMetrics.heightPixels;
         width = displayMetrics.widthPixels;
 
-        ticTacToeTextView.setY(height / 4);
-        tapToPlayTextView.setY(height - height / 7);
+        ticTacToeTextView.setY(height / 7);
+        tapToPlayTextView.setY(height - height / 9);
 
         Animator alphaAnimator = ObjectAnimator.ofFloat(tapToPlayTextView, View.ALPHA, 0f, 1f);
         alphaAnimator.setDuration(1000);

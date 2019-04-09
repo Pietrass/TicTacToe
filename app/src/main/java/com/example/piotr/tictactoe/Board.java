@@ -1,7 +1,10 @@
 package com.example.piotr.tictactoe;
 
+import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.GridLayout;
@@ -31,7 +34,9 @@ public class Board extends BaseActivity implements View.OnClickListener {
         turnTextSwitcher.setOutAnimation(getBaseContext(), android.R.anim.slide_out_right);
         boardGrid = findViewById(R.id.board_grid);
         winnerRelative = findViewById(R.id.winner_relative_layout);
+        winnerRelative.setY(height);
         winnerTextView = findViewById(R.id.winner_text_view);
+        winnerTextView.setOnClickListener(this);
 
         turnTextSwitcher.setY(height / 7);
         turnTextSwitcher.setText("X turn");
@@ -51,11 +56,17 @@ public class Board extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        BoardButton button = (BoardButton) v;
-        setButtonBackground(button);
-        v.setEnabled(false);
-        numOfMoves++;
-        checkIfAnybodyWon();
+        int id = v.getId();
+        if (id == R.id.winner_text_view) {
+            Intent intent = new Intent(getBaseContext(), Board.class);
+            startActivity(intent);
+        } else {
+            BoardButton button = (BoardButton) v;
+            setButtonBackground(button);
+            v.setEnabled(false);
+            numOfMoves++;
+            checkIfAnybodyWon();
+        }
     }
 
     private void checkIfAnybodyWon() {
@@ -99,9 +110,10 @@ public class Board extends BaseActivity implements View.OnClickListener {
         } else {
             winnerTextView.setText(winner + " " + getResources().getString(R.string.won));
         }
-        TranslateAnimation animation = new TranslateAnimation(0, 0, (float) height, (float) (height / 2 - winnerView.getHeight() / 2));
-        animation.setDuration(3000);
-        winnerView.startAnimation(animation);
+
+        ObjectAnimator animator = ObjectAnimator.ofFloat(winnerView, "translationY", height, height / 2.5f);
+        animator.setDuration(300);
+        animator.start();
     }
 
     private void setButtonBackground(BoardButton button) {
